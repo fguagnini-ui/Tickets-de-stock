@@ -1,0 +1,144 @@
+{
+  "entities": {
+    "StockReport": {
+      "title": "StockReport",
+      "description": "Reporte o ticket de problema, ingreso de mercadería o producto encontrado",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificador secuencial del reporte (01-00000)",
+          "pattern": "^01-[0-9]{5}$"
+        },
+        "tipo": {
+          "type": "string",
+          "description": "Tipo de reporte",
+          "enum": ["problema", "ingreso", "encontrado"]
+        },
+        "fecha": {
+          "type": "string",
+          "description": "Fecha del reporte en formato YYYY-MM-DD",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "reporta": {
+          "type": "string",
+          "description": "Nombre de la persona que reporta o registra",
+          "maxLength": 100
+        },
+        "sku": {
+          "type": "string",
+          "description": "SKU principal o representativo del producto",
+          "maxLength": 100
+        },
+        "desc": {
+          "type": "string",
+          "description": "Descripción del producto o resumen de la operación",
+          "maxLength": 500
+        },
+        "cant": {
+          "type": "number",
+          "description": "Cantidad total de unidades"
+        },
+        "trx": {
+          "type": "string",
+          "description": "Número de remito, factura, comprobante o transacción",
+          "maxLength": 150
+        },
+        "origen": {
+          "type": "string",
+          "description": "Sector de procedencia (Depósito, Proveedor, Devoluciones, etc.)",
+          "maxLength": 100
+        },
+        "causa": {
+          "type": "string",
+          "description": "Motivo del reporte (Ingreso, Devolución, Transferencia, etc.)",
+          "maxLength": 150
+        },
+        "sol": {
+          "type": "string",
+          "description": "Observaciones, solución temporal o comentarios",
+          "maxLength": 1000
+        },
+        "estado": {
+          "type": "string",
+          "description": "Estado actual del ticket",
+          "enum": ["Abierto", "Notificado", "En revisión", "Cerrado", "Cancelado"]
+        },
+        "mov": {
+          "type": "string",
+          "description": "ID del movimiento de resolución asociado si fue cerrado",
+          "maxLength": 50
+        },
+        "ubicacion": {
+          "type": "string",
+          "description": "Ubicación física en el depósito",
+          "maxLength": 150
+        }
+      },
+      "required": ["id", "tipo", "fecha", "reporta", "sku", "desc", "cant", "estado"]
+    },
+    "StockMovement": {
+      "title": "StockMovement",
+      "description": "Movimiento de stock confirmado que resuelve uno o varios reportes",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identificador secuencial del movimiento (02-00000)",
+          "pattern": "^02-[0-9]{5}$"
+        },
+        "fecha": {
+          "type": "string",
+          "description": "Fecha del movimiento",
+          "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+        },
+        "resp": {
+          "type": "string",
+          "description": "Responsable que ejecutó o confirmó el movimiento",
+          "maxLength": 100
+        },
+        "estado": {
+          "type": "string",
+          "description": "Estado del movimiento",
+          "enum": ["Confirmado"]
+        },
+        "notas": {
+          "type": "string",
+          "description": "Notas o comentarios adicionales del movimiento",
+          "maxLength": 1000
+        }
+      },
+      "required": ["id", "fecha", "resp", "estado"]
+    },
+    "StockMeta": {
+      "title": "StockMeta",
+      "description": "Metadatos y contadores secuenciales de la base de datos de stock",
+      "type": "object",
+      "properties": {
+        "np": {
+          "type": "number",
+          "description": "Próximo número correlativo para reportes (01-XXXXX)"
+        },
+        "nm": {
+          "type": "number",
+          "description": "Próximo número correlativo para movimientos (02-XXXXX)"
+        }
+      },
+      "required": ["np", "nm"]
+    }
+  },
+  "firestore": {
+    "/reportes/{reportId}": {
+      "schema": "StockReport",
+      "description": "Colección de tickets y reportes de stock"
+    },
+    "/movimientos/{movementId}": {
+      "schema": "StockMovement",
+      "description": "Colección de movimientos y resoluciones confirmadas"
+    },
+    "/meta/{metaId}": {
+      "schema": "StockMeta",
+      "description": "Configuración y contadores globales"
+    }
+  }
+}
