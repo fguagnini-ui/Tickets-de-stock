@@ -173,3 +173,20 @@ export async function updateCountersInFirestore(np: number, nm: number): Promise
     handleFirestoreError(error, OperationType.WRITE, metaPath);
   }
 }
+
+// Empties all reports and movements from Cloud Firestore
+export async function clearFirestoreDatabase(): Promise<void> {
+  try {
+    const repSnap = await getDocs(collection(db, 'reportes'));
+    for (const d of repSnap.docs) {
+      await deleteDoc(d.ref);
+    }
+    const movSnap = await getDocs(collection(db, 'movimientos'));
+    for (const d of movSnap.docs) {
+      await deleteDoc(d.ref);
+    }
+    await setDoc(doc(db, 'meta', 'counters'), { np: 1, nm: 1 });
+  } catch (error) {
+    handleFirestoreError(error, OperationType.DELETE, 'all');
+  }
+}

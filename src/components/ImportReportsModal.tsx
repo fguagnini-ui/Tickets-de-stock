@@ -598,7 +598,7 @@ export const ImportReportsModal: React.FC<ImportReportsModalProps> = ({
         ))}
       </datalist>
 
-      <div className="bg-white dark:bg-neutral-850 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-2xl max-w-7xl w-full max-h-[95vh] flex flex-col overflow-hidden animate-in fade-in-0 zoom-in-95 duration-150">
+      <div className="bg-white dark:bg-neutral-800 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-2xl max-w-7xl w-full max-h-[95vh] flex flex-col overflow-hidden animate-in fade-in-0 zoom-in-95 duration-150">
         {/* Header */}
         <div className="px-5 py-4 border-b border-neutral-200 dark:border-neutral-750 flex items-center justify-between gap-3 bg-neutral-50/70 dark:bg-neutral-900/70">
           <div className="flex items-center gap-3">

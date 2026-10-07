@@ -56,7 +56,7 @@ export const GitHubPagesModal: React.FC<GitHubPagesModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="w-full max-w-2xl bg-white dark:bg-neutral-850 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
+      <div className="w-full max-w-2xl bg-white dark:bg-neutral-800 rounded-3xl border border-neutral-200 dark:border-neutral-700 shadow-2xl flex flex-col max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4.5 border-b border-neutral-200 dark:border-neutral-800 bg-neutral-50/50 dark:bg-neutral-900/50">
           <div className="flex items-center gap-3">

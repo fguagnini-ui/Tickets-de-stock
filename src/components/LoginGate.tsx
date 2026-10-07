@@ -153,7 +153,7 @@ export const LoginGate: React.FC<LoginGateProps> = ({ onLoginSuccess }) => {
           type="button"
           onClick={handleGoogleLogin}
           disabled={isSubmitting}
-          className="w-full py-2.5 px-4 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-850 hover:bg-neutral-50 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-100 transition-all cursor-pointer shadow-2xs flex items-center justify-center gap-2"
+          className="w-full py-2.5 px-4 rounded-xl text-xs font-bold border border-neutral-300 dark:border-neutral-600 bg-white dark:bg-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-700 text-neutral-800 dark:text-neutral-100 transition-all cursor-pointer shadow-2xs flex items-center justify-center gap-2"
         >
           <svg className="w-4 h-4" viewBox="0 0 24 24">
             <path

@@ -601,7 +601,7 @@ export const NewReportModal: React.FC<NewReportModalProps> = ({
                   <button
                     type="button"
                     onClick={handleAddItem}
-                    className="w-full py-2 border border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 rounded-xl text-xs font-bold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-850 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+                    className="w-full py-2 border border-dashed border-neutral-300 dark:border-neutral-700 hover:border-neutral-400 dark:hover:border-neutral-500 rounded-xl text-xs font-bold text-neutral-600 dark:text-neutral-300 hover:bg-neutral-50 dark:hover:bg-neutral-800 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
                   >
                     <Plus className="w-4 h-4" />
                     <span>+ Agregar otro producto al remito / reporte</span>

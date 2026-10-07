@@ -20,7 +20,8 @@ import {
   updateReportStatusInFirestore,
   saveMovementToFirestore,
   deleteMovementInFirestore,
-  updateCountersInFirestore
+  updateCountersInFirestore,
+  clearFirestoreDatabase
 } from './firebase/firebase';
 import { collection, onSnapshot, doc } from 'firebase/firestore';
 
@@ -328,17 +329,29 @@ export default function App() {
     showToast(`Movimiento ${movementId} anulado`);
   };
 
-  const handleResetExample = () => {
+  const handleResetExample = async () => {
     if (window.confirm('¿Deseas restaurar la base de datos a los valores originales de database.json?')) {
+      const defaultDb = loadDatabase();
+      setDb(defaultDb);
+      saveDatabase(defaultDb);
       try {
-        localStorage.removeItem('tickets_stock_v2');
-      } catch {}
-      setDb(loadDatabase());
-      showToast('Base de datos restaurada localmente');
+        await clearFirestoreDatabase();
+        for (const r of defaultDb.reportes) {
+          await saveReportToFirestore(r);
+        }
+        for (const m of defaultDb.movimientos) {
+          const resolvedIds = m.lineas.map((l) => l.pid).filter(Boolean);
+          await saveMovementToFirestore(m, resolvedIds);
+        }
+        await updateCountersInFirestore(defaultDb.np, defaultDb.nm);
+      } catch (e) {
+        console.warn('Error restaurando en Firestore:', e);
+      }
+      showToast('Base de datos restaurada');
     }
   };
 
-  const handleClearAll = () => {
+  const handleClearAll = async () => {
     if (window.confirm('¿Seguro que deseas vaciar toda la base de datos? Se borrarán todos los reportes y movimientos.')) {
       const emptyDb: StockDatabase = {
         np: 1,
@@ -348,7 +361,12 @@ export default function App() {
       };
       setDb(emptyDb);
       saveDatabase(emptyDb);
-      showToast('Base de datos vaciada');
+      try {
+        await clearFirestoreDatabase();
+      } catch (e) {
+        console.warn('Error al vaciar en Firestore:', e);
+      }
+      showToast('Base de datos vaciada en la nube');
     }
   };
 

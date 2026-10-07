@@ -30,9 +30,9 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
   const filteredReports = useMemo(() => {
     const q = searchQuery.toLowerCase().trim();
     return [...reportes].reverse().filter((r) => {
-      // Status filter: "Abiertas" shows all except "Cerrado"
+      // Status filter: "Abiertas" shows all active reports except "Cerrado" and "Cancelado"
       if (statusFilter === 'Abiertas' || statusFilter === 'abiertas') {
-        if (r.estado === 'Cerrado') return false;
+        if (r.estado === 'Cerrado' || r.estado === 'Cancelado') return false;
       } else if (statusFilter !== 'Todos' && r.estado !== statusFilter) {
         return false;
       }
@@ -65,7 +65,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
   const countByStatus = (status: string) => {
     if (status === 'Todos') return reportes.length;
     if (status === 'Abiertas' || status === 'abiertas') {
-      return reportes.filter((r) => r.estado !== 'Cerrado').length;
+      return reportes.filter((r) => r.estado !== 'Cerrado' && r.estado !== 'Cancelado').length;
     }
     return reportes.filter((r) => r.estado === status).length;
   };
@@ -162,7 +162,8 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
               { id: 'Todos', label: 'Todos' },
               { id: 'Notificado', label: 'Notificado' },
               { id: 'En revisión', label: 'En revisión' },
-              { id: 'Cerrado', label: 'Cerradas' }
+              { id: 'Cerrado', label: 'Cerradas' },
+              { id: 'Cancelado', label: 'Canceladas' }
             ].map(({ id, label }) => {
               const count = countByStatus(id);
               const isActive = statusFilter === id;
@@ -176,7 +177,7 @@ export const ReportsView: React.FC<ReportsViewProps> = ({
                       ? 'bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-xs'
                       : 'bg-neutral-100 dark:bg-neutral-700/60 text-neutral-600 dark:text-neutral-300 hover:bg-neutral-200 dark:hover:bg-neutral-700'
                   }`}
-                  title={id === 'Abiertas' ? 'Muestra todos los reportes excepto los cerrados' : undefined}
+                  title={id === 'Abiertas' ? 'Muestra todos los reportes activos (excluye cerrados y cancelados)' : undefined}
                 >
                   <span>{label}</span>
                   <span className="ml-1 opacity-70 font-mono text-[11px]">({count})</span>

@@ -110,7 +110,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
 
           {/* 2º Motivo / Causa */}
           {report.causa && (
-            <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-white/90 dark:bg-neutral-850/90 text-neutral-700 dark:text-neutral-300 border border-neutral-300/80 dark:border-neutral-700">
+            <span className="inline-block px-2.5 py-0.5 rounded-md text-xs font-semibold bg-white/90 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 border border-neutral-300/80 dark:border-neutral-700">
               {report.causa}
             </span>
           )}
@@ -134,7 +134,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
           <div className="mt-3 space-y-2">
             {/* Header with item count and total units (without the label "Detalle de productos") */}
             <div className="flex items-center justify-between text-xs pb-1 border-b border-neutral-200/50 dark:border-neutral-700/50">
-              <span className="font-bold font-mono text-neutral-700 dark:text-neutral-300 bg-white/80 dark:bg-neutral-800/80 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
+              <span className="font-bold font-mono text-neutral-700 dark:text-neutral-300 bg-white/80 dark:bg-neutral-800 px-2 py-0.5 rounded border border-neutral-200 dark:border-neutral-700">
                 {items.length} SKUs
               </span>
               <span
@@ -152,7 +152,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
               {visibleItems.map((it, idx) => (
                 <div
                   key={`${it.sku}-${idx}`}
-                  className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-neutral-850/90 border border-neutral-200/70 dark:border-neutral-700/70 text-xs shadow-2xs"
+                  className="flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-neutral-800 border border-neutral-200/70 dark:border-neutral-700 text-xs shadow-2xs"
                 >
                   <div className="min-w-0 flex-1">
                     <div className="font-mono font-extrabold text-neutral-900 dark:text-white truncate">
@@ -163,7 +163,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
                     </div>
                   </div>
                   <div className="shrink-0 text-right">
-                    <span className="font-mono font-bold px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 text-xs border border-neutral-200/70 dark:border-neutral-700">
+                    <span className="font-mono font-bold px-2 py-0.5 rounded-md bg-neutral-100 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 text-xs border border-neutral-200/70 dark:border-neutral-700">
                       {cardConfig.sign}{it.cant} u.
                     </span>
                   </div>
@@ -176,7 +176,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
               <button
                 type="button"
                 onClick={() => setIsExpanded(!isExpanded)}
-                className="w-full mt-1.5 py-1 text-xs font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white flex items-center justify-center gap-1 bg-white/60 dark:bg-neutral-800/60 rounded-lg border border-neutral-200/60 dark:border-neutral-700/60 transition-colors cursor-pointer"
+                className="w-full mt-1.5 py-1 text-xs font-bold text-neutral-700 dark:text-neutral-300 hover:text-neutral-900 dark:hover:text-white flex items-center justify-center gap-1 bg-white/60 dark:bg-neutral-800 rounded-lg border border-neutral-200/60 dark:border-neutral-700 transition-colors cursor-pointer"
               >
                 {isExpanded ? (
                   <>
@@ -194,7 +194,7 @@ export const ReportCard: React.FC<ReportCardProps> = ({
           </div>
         ) : (
           /* Single SKU Card: SKU and description grouped together, prominent SKU, description below */
-          <div className="mt-3 flex items-center justify-between gap-3 bg-white/90 dark:bg-neutral-850/90 p-3.5 rounded-xl border border-neutral-200/80 dark:border-neutral-700/80 shadow-2xs">
+          <div className="mt-3 flex items-center justify-between gap-3 bg-white/90 dark:bg-neutral-800 p-3.5 rounded-xl border border-neutral-200/80 dark:border-neutral-700 shadow-2xs">
             <div className="min-w-0 flex-1">
               <div className="text-base sm:text-lg font-extrabold font-mono text-neutral-900 dark:text-white tracking-tight">
                 {items[0]?.sku || report.sku || 'SKU'}
